@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amigo Secreto Online</title>
+    <link rel="stylesheet" href="src/estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎁 Amigo Secreto Online</h1>
+        <p class="subtitle">Sorteo privado y seguro desde casa</p>
+        
+        <div class="mode-selector">
+            <button class="mode-btn active" onclick="switchMode('organizer')">
+                👨‍💼 Organizar
+            </button>
+            <button class="mode-btn" onclick="switchMode('participant')">
+                🎅 Ver mi resultado
+            </button>
+        </div>
+
+        <!-- SECCIÓN ORGANIZADOR -->
+        <div id="organizerSection" class="section active">
+            <div class="info-box">
+                💡 Como organizador, agregarás participantes y generarás códigos únicos para cada uno. Luego comparte cada código por privado (WhatsApp, email, etc.)
+            </div>
+
+            <div id="setupPhase">
+                <div class="input-group">
+                    <input type="text" id="nameInput" placeholder="Nombre del participante" />
+                    <button class="btn-primary" onclick="addParticipant()">Agregar</button>
+                </div>
+                <div class="error" id="errorMsg"></div>
+                
+                <div class="participants-list" id="participantsList"></div>
+                
+                <div class="action-buttons">
+                    <button class="btn-secondary" onclick="generateCodes()" id="generateBtn" style="display: none;">
+                        🎲 Generar Códigos
+                    </button>
+                </div>
+            </div>
+
+            <div id="codesPhase" style="display: none;">
+                <div class="warning-box">
+                    ⚠️ <strong>Importante:</strong> Comparte cada código SOLO con su respectivo participante de forma privada. Guarda estos códigos en un lugar seguro.
+                </div>
+                <div id="codesList"></div>
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="resetOrganizer()">Nuevo Sorteo</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN PARTICIPANTE -->
+        <div id="participantSection" class="section">
+            <div class="info-box">
+                🔐 Ingresa el código que te compartió el organizador para ver a quién le regalarás
+            </div>
+
+            <div id="codeInputPhase">
+                <div class="input-group">
+                    <input type="text" id="codeInput" placeholder="Ingresa tu código" style="text-transform: uppercase;" />
+                    <button class="btn-primary" onclick="revealWithCode()">Ver resultado</button>
+                </div>
+                <div class="error" id="codeError"></div>
+            </div>
+
+            <div id="resultPhase" style="display: none;">
+                <div class="reveal-result">
+                    <h2>🎁 Tu amigo secreto es:</h2>
+                    <div class="gift-name" id="giftName"></div>
+                    <p style="color: #718096; margin-top: 20px;">
+                        ¡Prepara un regalo especial! 🎉
+                    </p>
+                </div>
+                <button class="btn-primary" onclick="resetParticipant()" style="width: 100%; margin-top: 20px;">
+                    Ingresar otro código
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/app.js"></script>
+</body>
+</html>
